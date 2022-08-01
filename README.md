@@ -78,7 +78,9 @@ An example of update is:
     }
 ```
 
+
 ##FAQ
+
 ###How do I know which data-* attributes are supported in my SVG? 
 The SVG tags are described in the ReatMetric UI module: https://github.com/dariol83/reatmetric/blob/master/eu.dariolucia.reatmetric.ui/Mimics.md
 
