@@ -6,22 +6,22 @@ Getting started with ReatMetric mimics is very simple: just follow the steps bel
 
 - Include the library in your HTML page
 
-
+```
     <script type="text/javascript" src="rtmt-mimics.js"></script>
-  
+```
   
 - Identify an element in your HTML page that will contain the SVG mimic that you want to use, 
 e.g. a div element with id "div1". 
 
-
+```
     <div id="div1"><!-- The SVG will go here --></div>
-
+```
 
 - Create a script block and a function, which will be triggered by some user interactions, e.g. on page load or on click,
 e.g. with a button. The script block instantiates the mimics factory, and the function requests the 
 loading of a SVG mimic.
 
-
+```
     <script type="text/javascript">
         var factoryObj = new RtmtMimics(document); // Create the mimics factory
         var mimicController = null; // This variable will  
@@ -42,14 +42,14 @@ loading of a SVG mimic.
         
         
     </script>
- 
+``` 
  
  - Once the mimic is created, it can be updated providing the state of the declared bindings. A state is a plain Javascript object,
  whose properties are access by the conditions and expressions defined in the SVG file. While conditions can access all properties of the
  object, expressions will only access the properties declared during the creation of the mimic. A real application would retrieve such updates from a server service (e.g. as a JSON resource) and provide the result to the mimic controller.
 An example of update is:
  
- 
+``` 
      var updates = {
  			"ID.OF.PARAM1" : {
  				"raw" : 0,
@@ -65,18 +65,18 @@ An example of update is:
  			}
  		};
  		mimicController.update(updates);
- 
+``` 
 
 - If the mimic must be disposed, the dispose() function can be called on the mimic controller.
 
-
+```
     async function disposeSVG(){
         if(mimicController != null) {
             mimicController.dispose();
             mimicController = null;
         }
     }
-
+```
 
 The SVG tags are described in the ReatMetric UI module: https://github.com/dariol83/reatmetric/blob/master/eu.dariolucia.reatmetric.ui/Mimics.md
 
