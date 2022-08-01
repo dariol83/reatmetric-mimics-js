@@ -1,7 +1,9 @@
 # ReatMetric Mimics JS Library
+
 A Javascript library for the visualisation of SVG mimics in HTML pages, using declaration-oriented behaviour for SVG scripting, based on ReatMetric's mimics engine.
  
 ## Getting started
+
 Getting started with ReatMetric mimics is very simple: just follow the steps below.
 
 - Include the library in your HTML page
@@ -79,12 +81,15 @@ An example of update is:
 ```
 
 
+
 ##FAQ
 
 ###How do I know which data-* attributes are supported in my SVG? 
+
 The SVG tags are described in the ReatMetric UI module: https://github.com/dariol83/reatmetric/blob/master/eu.dariolucia.reatmetric.ui/Mimics.md
 
 ###My JSON object does not have eng, raw, alarm, validity as properties. Can I still use this library?
+
 This Javascript framework is not limited to the reference names ($eng, $raw, $alarm, $validity) defined by ReatMetric: **any** Javascript object property
 can be access by this library in the condition evaluation, and **any** property can be access by this library in the expression evaluation, as long 
 as it is declared in the newMimic() function. For instance, if your JSON object has *text*, *name* and *value* as property names, you
