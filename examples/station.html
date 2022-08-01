@@ -1,0 +1,158 @@
+<html>
+<head>
+<script type="text/javascript" src="rtmt-mimics.js">
+</script>
+
+<script type="text/javascript">
+
+var mimicController = null;
+var factoryObj = new RtmtMimics(document);
+var reatmetric = new Object();
+
+reatmetric.exec = function (arg) {
+	alert("exec: " + arg);
+}
+
+reatmetric.and = function (arg) {
+	alert("and: " + arg);
+}
+
+reatmetric.set = function (arg) {
+	alert("set: " + arg);
+}
+
+function conf1(){
+    if(mimicController != null) {
+		var updates = {
+			"STATION.POWERSUPPLY.PS_STATUS" : {
+				"raw" : 0,
+				"eng" : "ON",
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.POWERSUPPLY.PS_TENSION" : {
+				"raw" : 240,
+				"eng" : 240,
+				"alarm" : "ALARM",
+				"validity" : "VALID"
+			},
+			"STATION.VENTILATION.VNT_FAN1_SPEED" : {
+				"raw" : 40,
+				"eng" : 40,
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.WIRINGS.MTX_TO_SPLITTER" : {
+				"raw" : 1,
+				"eng" : "ACTIVE",
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.SPLITTER.SPT_S_POWERPERCENT" : {
+				"raw" : 70,
+				"eng" : 70,
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.TURBINE.TRB_OUTPUT" : {
+				"raw" : 70,
+				"eng" : 70,
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.SWITCH.SW_POSITION" : {
+				"raw" : 0,
+				"eng" : "POSITION_1",
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			}
+		};
+		mimicController.update(updates);
+	}
+}
+
+function conf2(){
+    if(mimicController != null) {
+		var updates = {
+			"STATION.POWERSUPPLY.PS_STATUS" : {
+				"raw" : 0,
+				"eng" : "ON",
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.POWERSUPPLY.PS_TENSION" : {
+				"raw" : 140,
+				"eng" : 140,
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.VENTILATION.VNT_FAN1_SPEED" : {
+				"raw" : 0,
+				"eng" : 0,
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.WIRINGS.MTX_TO_SPLITTER" : {
+				"raw" : 0,
+				"eng" : "OFF",
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			},
+			"STATION.SPLITTER.SPT_S_POWERPERCENT" : {
+				"raw" : 20,
+				"eng" : 20,
+				"alarm" : "WARNING",
+				"validity" : "VALID"
+			},
+			"STATION.TURBINE.TRB_OUTPUT" : {
+				"raw" : 30,
+				"eng" : 30,
+				"alarm" : "WARNING",
+				"validity" : "VALID"
+			},
+			"STATION.SWITCH.SW_POSITION" : {
+				"raw" : 1,
+				"eng" : "POSITION_2",
+				"alarm" : "NOMINAL",
+				"validity" : "VALID"
+			}
+		};
+		mimicController.update(updates);
+	}
+}
+
+async function loadSVG(){
+	if(mimicController === null) {		
+		mimicController = factoryObj.newMimic(
+			'https://127.0.0.1:18001/station.svg',
+			document.getElementById("div1"),
+			["raw", "eng", "alarm", "validity"]);
+		await mimicController.initialise();
+		var bindings = mimicController.getBindings();
+		bindings.forEach(a => console.log("Binding detected: " + a));
+	}
+}
+
+async function disposeSVG(){
+	if(mimicController != null) {
+		mimicController.dispose();
+		mimicController = null;
+	}
+}
+</script>
+</head>
+<body>
+<button type="button" onclick="loadSVG()">Load SVG</button>
+<button type="button" onclick="disposeSVG()">Dispose SVG</button>
+<button type="button" onclick="conf1()">Configuration 1</button>
+<button type="button" onclick="conf2()">Configuration 2</button>
+<br />
+<div id="div1">
+<!-- The SVG will go here -->
+</div>
+<br />
+<p>Station Mimics Example</p>
+<hr />
+
+</body>
+</html>
